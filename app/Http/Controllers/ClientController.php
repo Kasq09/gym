@@ -7,11 +7,22 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $filter = $request->input('filter');
         return view("clients", [
-            "clients"=> Client::paginate(10)
+            "clients"=> Client::
+                where('name','like', '%'.$filter.'%')
+                ->orWhere('surname','like', '%'.$filter.'%')
+                ->orWhere('phone','like', '%'.$filter.'%')
+                ->sortable()->paginate(20),
+            "filter" => $filter
         ]);
     }
+
+
+
+
+
 
     public function store(Request $request){
         Client::create($request->all());

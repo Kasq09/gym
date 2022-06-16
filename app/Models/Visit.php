@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Visit extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
     public $timestamps= false;
     protected $guarded=[];
+
+    Public $sortable =['name', 'surname' ];
+
 
     public function client()
     {
@@ -21,7 +25,7 @@ class Visit extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public function employee()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

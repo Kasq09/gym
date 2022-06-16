@@ -16,16 +16,20 @@
                         {{ __('Sākums') }}
                     </x-nav-link>
                 </div>
+                @if(Auth::user()->role == "admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('clients')" :active="request()->routeIs('clients')">
                         {{ __('Klienti') }}
                     </x-nav-link>
                 </div>
+                @endif
+                @if(Auth::user()->role == "admin")
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('rooms')" :active="request()->routeIs('rooms')">
                         {{ __('Telpas') }}
                     </x-nav-link>
                 </div>
+                    @endif
 
             </div>
 
@@ -56,12 +60,12 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Izrakstīties') }}
                             </x-dropdown-link>
                         </form>
 
-
-                        <form method="POST" action="{{ route('register') }}">
+                        @if(Auth::user()->role == "admin")
+                        <form method="GET" action="{{ route('register') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('register')"
@@ -70,6 +74,7 @@
                                 {{ __('Pievienot darbinieku') }}
                             </x-dropdown-link>
                         </form>
+                            @endif
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -117,7 +122,7 @@
                 </form>
 
 
-
+                @if(Auth::user()->role == "admin")
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
@@ -128,7 +133,7 @@
                     </x-responsive-nav-link>
 
                 </form>
-
+                @endif
             </div>
         </div>
     </div>

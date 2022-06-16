@@ -1,25 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Pievienot telpu') }}
         </h2>
     </x-slot>
-
+    @if(Auth::user()->role == "admin")
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="post" action="{{route("addroom")}}">
+                    <form method="post" action="{{route("addroom")}}" class="pb-4">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Telpa</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Apraksts</label>
-                            <input type="text" class="form-control" id="description" name="description">
+                            <input type="text" class="form-control" id="description" name="description" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end mb-3">Pievienot</button>
 
                     </form>
 
@@ -27,4 +27,7 @@
             </div>
         </div>
     </div>
+    @else
+        <h1 class="text-center" >Jums nav piekļuves šai lapai</h1>
+    @endif
 </x-app-layout>

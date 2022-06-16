@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VisitController;
 use App\Models\Client;
+use App\Models\Coach;
 use App\Models\Room;
+use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', [VisitController::class, "index"])->middleware(['auth'])->name('dashboard');
@@ -44,12 +48,33 @@ Route::post('/addroom', [RoomController::class, "store"])->middleware(['auth'])-
 Route::view('/addroom', 'addroom')->middleware(['auth'])->name('addroom');;
 
 Route::view('/addvisit', 'addvisit',
-    ["clients"=>Client::all(),
-        "rooms"=>Room::all()
+    ["clients"=>Client::orderBy('surname')->get(),
+        "rooms"=>Room::all(),
+        "coaches"=>User::where('role', '=', 'coach')->get()
     ])->middleware(['auth'])->name('addvisit');;
 
 Route::post('/addvisit', [VisitController::class, "store"])->middleware(['auth'])->name('addvisit');
 Route::get('/edit-visit/{id}', [VisitController::class, "edit"]);
 Route::put('update-visit/{id}', [VisitController::class, "update"]);
+
+Route::get('/clientvisits/{id}', function ($id) {
+    return view('clientvisits', [
+        "visits"=> Visit::where("client_id", $id)->with(["client","room"])->paginate(10)
+    ]);
+
+});
+
+Route::get('/printvisits', [VisitController::class, "printvisits"])->middleware(['auth'])->name('printvisits');
+
+
+
+Route::get('/addclientvisit/{id}', function ($id) {
+    return view('addclientvisit', [
+        "clients" => Client::where('id', '=' , $id)->get(),
+        "rooms"=> Room::all(),
+        "coaches"=> User::where('role', '=', 'coach')->get()
+    ]);
+
+});
 
 require __DIR__.'/auth.php';

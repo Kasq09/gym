@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("room_id");
-            $table->foreignId("client_id");
-            $table->foreignId("employee_id");
+            $table->foreignId("room_id")->constrained()->onDelete('cascade');
+            $table->foreignId("client_id")->constrained()->onDelete('cascade');
+            $table->foreignId("user_id")->nullable()->constrained()->onDelete('cascade');
             $table->dateTime("start_time");
             $table->dateTime("end_time");
         });

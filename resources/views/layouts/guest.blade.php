@@ -17,7 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased bg-gradient-to-r from-cyan-500 to-blue-500 bg-[url('../public/source/logo.jpg')]">
             {{ $slot }}
         </div>
     </body>
