@@ -15,7 +15,7 @@ class Visit extends Model
     Public $sortable =['name', 'surname' ];
 
 
-    public function clients()
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }
