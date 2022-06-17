@@ -14,7 +14,7 @@ class ClientController extends Controller
                 where('name','like', '%'.$filter.'%')
                 ->orWhere('surname','like', '%'.$filter.'%')
                 ->orWhere('phone','like', '%'.$filter.'%')
-                ->sortable()->paginate(20),
+                ->paginate(20),
             "filter" => $filter
         ]);
     }
