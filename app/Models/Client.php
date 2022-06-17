@@ -9,6 +9,9 @@ use Kyslik\ColumnSortable\Sortable;
 class Client extends Model
 {
     use HasFactory, Sortable;
+
+    protected $table = 'clients';
+
     public $timestamps= false;
     protected $guarded=[];
 
