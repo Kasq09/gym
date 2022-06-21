@@ -74,7 +74,6 @@ $(document).ready(function(){
             $('#time1').val('')
         } else {
             let date = new Date($('#time1').val())
-            alert(new Date(date.setHours(23)).toISOString().substring(0,16))
             $('#time2').attr('min', $('#time1').val())
             $('#time2').attr('max', new Date(date.setHours(23)).toISOString().substring(0,16))
         }
