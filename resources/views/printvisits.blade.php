@@ -52,6 +52,8 @@
         @endforeach
             </tbody>
         </table>
+                    <p class='text-right'><b>Kopējais rezervāciju skaits: {{$visits->count()}}</b></p>
+
     </div>
     <button class="btn btn-primary" onclick="printet()">Printēt</button>
 

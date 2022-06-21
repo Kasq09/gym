@@ -53,7 +53,6 @@
 
 
 
-
                         <table class="table table table-hover" id="myTable">
                             <thead class="thead-dark">
                             <tr>
@@ -92,6 +91,7 @@
                             </tbody>
                         </table>
                     {{$visits->links()}}
+
                 </div>
             </div>
         </div>
