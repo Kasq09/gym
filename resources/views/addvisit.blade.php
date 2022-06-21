@@ -17,7 +17,7 @@
                         <select class="form-select mb-4" aria-label="Default select example"  name="client_id" required>
 
 
-                           <option value="" disabled selected>Izvēties klientu</option>
+                           <option value="" disabled selected required>Izvēties klientu</option>
                             @foreach($clients as $client)
                                 <option value="{{$client->id}}">{{$client->surname}} {{$client->name}} </option>
                             @endforeach
@@ -26,7 +26,7 @@
                         <select class="form-select mb-4" aria-label="Default select example" name="room_id" required>
 
 
-                            <option value="" disabled selected>Izvēlēties telpu</option>
+                            <option value="" disabled selected required>Izvēlēties telpu</option>
                             @foreach($rooms as $room)
                                 <option value="{{$room->id}}">{{$room->name}} </option>
                             @endforeach
@@ -43,11 +43,12 @@
 
                         <div class="mb-3">
                             <label for="start_time" class="form-label">Sākuma laiks </label>
-                            <input type="datetime-local" class="form-control" id="start_time" name="start_time" required>
+                            <input id='time1' type="datetime-local" class="form-control" id="start_time" name="start_time" required
+                            min='{{ \Carbon\Carbon::now()->format('Y-m-d')}}T{{ \Carbon\Carbon::now()->format('h:m') }}'>
                         </div>
                         <div class="mb-3">
                             <label for="end_time" class="form-label">Beigu laiks</label>
-                            <input type="datetime-local" class="form-control" id="end_time" name="end_time" required>
+                            <input onChange='onChange' id='time2' type="datetime-local" class="form-control" id="end_time" name="end_time" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Pievienot</button>
@@ -61,3 +62,27 @@
         <h1 class="text-center" >Jums nav piekļuves šai lapai</h1>
     @endif
 </x-app-layout>
+
+<script>
+$(document).ready(function(){
+    $('#time1').change(function(){
+        if(new Date($('#time1').val()).getHours() < 14 || new Date($('#time1').val()).getHours() > 20) {
+            alert('Darba laiks ir no 14.00 līdz 20.00')
+            $('#time1').val('')
+        } else {
+            $('#time2').attr('min', $('#time1').val())
+            $('#time2').attr('max', $('#time1').val())
+        }
+    })
+
+    $('#time2').change(function(){
+        if(new Date($('#time2').val()).getHours() < 14 || new Date($('#time2').val()).getHours() > 20) {
+            alert('Darba laiks ir no 14.00 līdz 20.00')
+            $('#time2').val('')
+        } else if($('#time2').val() < $('#time1').val()) {
+            alert('Nevar izvēlēties beigu laiku, kas ir pirms sākuma laika')
+            $('#time2').val('')
+        }
+    })
+});
+</script>
