@@ -70,8 +70,10 @@ $(document).ready(function(){
             alert('Darba laiks ir no 14.00 līdz 20.00')
             $('#time1').val('')
         } else {
+            let date = new Date($('#time1').val())
+            alert(new Date(date.setHours(23)).toISOString().substring(0,16))
             $('#time2').attr('min', $('#time1').val())
-            $('#time2').attr('max', $('#time1').val())
+            $('#time2').attr('max', new Date(date.setHours(23)).toISOString().substring(0,16))
         }
     })
 

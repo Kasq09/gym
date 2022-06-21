@@ -61,14 +61,22 @@
     @endif
 </x-app-layout>
 <script>
+function addHoursToDate(date, hours) {
+  return new Date(new Date(date).setHours(date.getHours() + hours));
+}
 $(document).ready(function(){
+
+
+
     $('#time1').change(function(){
         if(new Date($('#time1').val()).getHours() < 14 || new Date($('#time1').val()).getHours() > 20) {
             alert('Darba laiks ir no 14.00 līdz 20.00')
             $('#time1').val('')
         } else {
+            let date = new Date($('#time1').val())
+            alert(new Date(date.setHours(23)).toISOString().substring(0,16))
             $('#time2').attr('min', $('#time1').val())
-            $('#time2').attr('max', $('#time1').val())
+            $('#time2').attr('max', new Date(date.setHours(23)).toISOString().substring(0,16))
         }
     })
 
