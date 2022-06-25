@@ -42,12 +42,12 @@
                             @endforeach
                         </select>
                                 <div class="mb-3">
-                                    <label id='time1' for="start_time" class="form-label">Sākuma laiks</label>
-                                    <input type="datetime-local" class="form-control" id="start_time" name="start_time" value="{{str_replace(" ", "T", $visit->start_time)}}" required>
+                                    <label  for="start_time" class="form-label">Sākuma laiks</label>
+                                    <input id='time1' type="datetime-local" class="form-control" name="start_time" value="{{str_replace(" ", "T", $visit->start_time)}}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="end_time" class="form-label">Beigu laiks</label>
-                                    <input id='time2' type="datetime-local" class="form-control" id="end_time" name="end_time" value="{{str_replace(" ", "T", $visit->end_time)}}" required>
+                                    <input id='time2' type="datetime-local" class="form-control" name="end_time" value="{{str_replace(" ", "T", $visit->end_time)}}" required>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -62,6 +62,12 @@
 </x-app-layout>
 <script>
 $(document).ready(function(){
+
+let date = new Date($('#time1').val())
+$('#time2').attr('min', $('#time1').val())
+$('#time2').attr('max', new Date(date.setHours(23)).toISOString().substring(0,16))
+
+
     $('#time1').change(function(){
         if(new Date($('#time1').val()).getHours() < 14 || new Date($('#time1').val()).getHours() > 20) {
             alert('Darba laiks ir no 14.00 līdz 20.00')
@@ -70,6 +76,7 @@ $(document).ready(function(){
             let date = new Date($('#time1').val())
             $('#time2').attr('min', $('#time1').val())
             $('#time2').attr('max', new Date(date.setHours(23)).toISOString().substring(0,16))
+            $('#time2').val('')
         }
     })
 
