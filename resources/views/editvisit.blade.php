@@ -36,10 +36,14 @@
 
                         <select class="form-select mb-4" aria-label="Default select example"  name="user_id">
 
-                        <option></option>
+                        <option name='coach_id'></option>
 
                             @foreach($coaches as $coach)
-                                <option value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
+                            @if($coach->id == $visit->coach_id)
+                                <option selected name='coach_id' value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
+                            @else
+                                <option name='coach_id' value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
+                            @endif
                             @endforeach
                         </select>
                                 <div class="mb-3">
