@@ -40,7 +40,7 @@
 
                             @foreach($coaches as $coach)
                             @if($coach->id == $visit->coach_id)
-                                <option selected name='coach_id' value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
+                                <option selected='selected' name='coach_id' value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
                             @else
                                 <option name='coach_id' value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
                             @endif
