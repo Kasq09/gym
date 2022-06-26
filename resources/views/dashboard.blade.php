@@ -59,8 +59,8 @@
                                 <th scope="col" class="ps-5 text-secondary">@sortablelink('client.name', 'Vārds')</th>
                                 <th scope="col" class="ps-5">@sortablelink('client.surname', 'Uzvārds')</th>
                                 <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(3)')"scope="col">Telefons</th>
-                                <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(4)')"scope="col">Sākuma laiks</th>
-                                <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(5)')"scope="col">Beigu laiks</th>
+                                <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(4)')"scope="col">@sortablelink('start_time', 'Sākuma laiks')</th>
+                                <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(5)')"scope="col">@sortablelink('end_time', 'Beigu laiks')</th>
                                 <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(6)')"scope="col">Treneris</th>
                                 <th class="link-primary" onclick="w3.sortHTML('#myTable','.item', 'td:nth-child(7)')"scope="col">Telpa</th>
                             </tr>

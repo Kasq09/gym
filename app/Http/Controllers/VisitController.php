@@ -21,7 +21,7 @@ class VisitController extends Controller
                         ->orWhereRelation('client','surname','like', '%'.$filter.'%')
                         ->orWhereRelation('user','name','like', '%'.$filter.'%')
                         ->orWhereRelation('room','name','like', '%'.$filter.'%')
-                        ->sortable()->paginate(10),
+                        ->sortable()->paginate(15),
                     "filter" => $filter
                 ]);
             } else {
@@ -32,7 +32,7 @@ class VisitController extends Controller
                         ->orWhereRelation('client','surname','like', '%'.$filter.'%')
                         ->orWhereRelation('user','name','like', '%'.$filter.'%')
                         ->orWhereRelation('room','name','like', '%'.$filter.'%')
-                        ->paginate(10),
+                        ->paginate(15),
                     "filter" => $filter
 
                 ]);
@@ -41,13 +41,13 @@ class VisitController extends Controller
             if (auth()->user()->role == 'admin') {
                 return view("dashboard", [
                     "visits"=> Visit::with(["client","room", "user"])
-                        ->sortable()->paginate(10),
+                        ->sortable()->paginate(15),
                     'filter' => ''
                 ]);
             } else {
                 return view("dashboard", [
                     "visits"=> auth()->user()->visits()->with(["client","room", "user"])
-                        ->paginate(10),
+                        ->paginate(15),
                     'filter' => ''
 
                 ]);

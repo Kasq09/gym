@@ -12,7 +12,7 @@ class Visit extends Model
     public $timestamps= false;
     protected $guarded=[];
 
-    Public $sortable =['name', 'surname' ];
+    Public $sortable =['name', 'surname', 'start_time', 'end_time' ];
 
 
     public function client()

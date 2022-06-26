@@ -36,6 +36,7 @@
 
                         <select class="form-select mb-4" aria-label="Default select example"  name="user_id">
 
+                        <option></option>
 
                             @foreach($coaches as $coach)
                                 <option value="{{$coach->id}}">{{$coach->name}} {{$coach->surname}} </option>
